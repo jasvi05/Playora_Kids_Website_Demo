@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Playora Kids | Premium Toy Store</title>
+
+<style>
+:root{
+  --bg:#f8fafc;
+  --surface:#ffffff;
+  --primary:#6366f1;
+  --secondary:#ec4899;
+  --accent:#22c55e;
+  --text:#0f172a;
+  --muted:#64748b;
+  --border:#e5e7eb;
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Segoe UI','Inter',sans-serif;
+}
+
+body{
+  background:linear-gradient(180deg,#eef2ff,#f8fafc);
+  color:var(--text);
+  min-height:100vh;
+}
+
+/* HEADER */
+header{
+  background:rgba(255,255,255,0.85);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--border);
+  padding:1rem 2rem;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  position:sticky;
+  top:0;
+  z-index:100;
+}
+
+header h1{
+  font-size:1.6rem;
+  font-weight:700;
+  background:linear-gradient(45deg,var(--primary),var(--secondary));
+  -webkit-background-clip:text;
+  color:transparent;
+}
+
+nav ul{
+  list-style:none;
+  display:flex;
+  gap:1.5rem;
+}
+
+nav li{
+  cursor:pointer;
+  font-weight:500;
+  color:var(--muted);
+}
+
+nav li:hover{ color:var(--primary); }
+
+.cart{
+  color:var(--primary);
+  font-weight:600;
+}
+
+/* PAGE SYSTEM */
+.page{
+  display:none;
+  padding:3rem 2rem;
+}
+
+.page.active{ display:block; }
+
+/* PRODUCT GRID */
+.products{
+  margin-top:2.5rem;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:2rem;
+}
+
+.card{
+  background:var(--surface);
+  border-radius:18px;
+  padding:1.2rem;
+  border:1px solid var(--border);
+  box-shadow:0 20px 30px rgba(0,0,0,0.05);
+  transition:transform .3s, box-shadow .3s;
+}
+
+.card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 30px 45px rgba(0,0,0,0.08);
+}
+
+.card img{
+  width:100%;
+  height:190px;
+  object-fit:cover;
+  border-radius:14px;
+}
+
+.card h3{ margin-top:1rem; }
+
+.card p{
+  color:var(--muted);
+  margin:.3rem 0;
+}
+
+.card button{
+  margin-top:.8rem;
+  width:100%;
+  padding:.7rem;
+  border:none;
+  border-radius:12px;
+  background:linear-gradient(45deg,var(--primary),var(--secondary));
+  color:white;
+  font-weight:600;
+  cursor:pointer;
+}
+
+/* CART */
+.cart-box{
+  background:var(--surface);
+  border-radius:16px;
+  padding:1.5rem;
+  border:1px solid var(--border);
+  max-width:900px;
+  margin:auto;
+}
+
+.cart-item{
+  display:grid;
+  grid-template-columns:2fr 1fr 1fr 1fr auto;
+  gap:1rem;
+  align-items:center;
+  margin-bottom:1rem;
+}
+
+.cart-item button{
+  border:none;
+  background:#f1f5f9;
+  padding:.3rem .6rem;
+  border-radius:6px;
+}
+
+.remove{
+  background:#ef4444!important;
+  color:white;
+}
+
+/* LOGIN & CHECKOUT */
+.panel{
+  max-width:420px;
+  background:var(--surface);
+  margin:auto;
+  padding:2.5rem;
+  border-radius:20px;
+  border:1px solid var(--border);
+  box-shadow:0 30px 60px rgba(0,0,0,0.08);
+}
+
+.panel h2{text-align:center;}
+
+.panel input,
+.panel button{
+  width:100%;
+  padding:.8rem;
+  margin-top:1rem;
+  border-radius:10px;
+}
+
+.panel input{
+  border:1px solid var(--border);
+}
+
+.panel button{
+  border:none;
+  background:linear-gradient(45deg,var(--primary),var(--secondary));
+  color:white;
+  font-weight:600;
+}
+
+/* RESPONSIVE */
+@media(max-width:640px){
+  nav ul{ flex-direction:column; gap:.6rem; }
+  .cart-item{ grid-template-columns:1fr; text-align:center; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>Playora Kids</h1>
+  <nav>
+    <ul>
+      <li onclick="show('home')">Home</li>
+      <li onclick="show('cart')">Cart</li>
+      <li onclick="show('login')">Login</li>
+      <li class="cart">🛒 <span id="count">0</span></li>
+    </ul>
+  </nav>
+</header>
+
+<section id="home" class="page active">
+  <h2>Thoughtfully Designed Toys</h2>
+  <div class="products">
+    <div class="card"><img src="https://image.made-in-china.com/2f0j00UpPoYyCGvgzq/Stem-Robotics-Science-Kits-Projects-Robot-Building-Kit-Toys.webp"><h3>STEM Robotics Kit</h3><p>₹3,499</p><button onclick="addReq('STEM Robotics Kit',3499)">Add to Cart</button></div>
+    <div class="card"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiZU-S3ILHTNxkR_lV6ZIVY8sDSZTib3YQt_9ghfFUGza4fiJTDsnvNizZhRau0cPOJzkIicsGYbd1dFfl6t72GK3lkrv5Mc5FsSMgquAOCyI8aB-_woi4k05TcvRLDnWGeGSlYoCs-KGs1BckovH4cZfOKMqsl-OXjTs2E3x1sAb1Btz1TV8m3-mUcupS3/s16000-rw/Block%20Play%20Montessori%20at%20Home.jpg"><h3>Wooden Montessori Blocks</h3><p>₹2,199</p><button onclick="addReq('Montessori Blocks',2199)">Add to Cart</button></div>
+    <div class="card"><img src="https://m.media-amazon.com/images/I/613PUqHphiL.jpg"><h3>Plush Dino Buddy</h3><p>₹1,599</p><button onclick="addReq('Plush Dino',1599)">Add to Cart</button></div>
+    <div class="card"><img src="https://m.media-amazon.com/images/I/81lFzDHQjgL._AC_UF1000,1000_QL80_.jpg"><h3>Creative Art Studio</h3><p>₹1,299</p><button onclick="addReq('Art Studio',1299)">Add to Cart</button></div>
+    <div class="card"><img src="https://www.funcorp.in/cdn/shop/products/shifu_orboot_earth_-_interactive_ar_world_globe_for_kids_4-10_years_4.jpg?v=1675943052"><h3>Interactive Story Globe</h3><p>₹2,799</p><button onclick="addReq('Story Globe',2799)">Add to Cart</button></div>
+    <div class="card"><img src="https://m.media-amazon.com/images/I/71G94RkmMyL.jpg"><h3>Mini Kitchen Playset</h3><p>₹2,499</p><button onclick="addReq('Kitchen Playset',2499)">Add to Cart</button></div>
+    <div class="card"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTt6nYZz6leZTh236IWObHTR2evJnC9Ivp63w&s"><h3>Magnetic Puzzle Board</h3><p>₹999</p><button onclick="addReq('Puzzle Board',999)">Add to Cart</button></div>
+    <div class="card"><img src="https://i5.walmartimages.com/seo/Sejoy-Baby-Balance-Bike-Children-Walker-for-1-3-Years-Old-Boys-Girls-12-36-Months-Kids-Toddler-First-Bike-4-Wheels-Riding-Toys-First-Birthday-Gifts_ff52e728-4cbe-47b6-84fb-48b157ef7a0f.ab664539779e4ad5266becfbdc700834.jpeg"><h3>Ride-On Balance Bike</h3><p>₹4,999</p><button onclick="addReq('Balance Bike',4999)">Add to Cart</button></div>
+  </div>
+</section>
+
+<section id="cart" class="page">
+  <div class="cart-box" id="items"></div>
+  <h2 style="text-align:center;margin-top:1rem;">
+    Total ₹<span id="total">0</span>
+  </h2>
+  <div style="text-align:center;margin-top:1rem;">
+    <button onclick="show('checkout')">Proceed to Checkout</button>
+  </div>
+</section>
+
+<section id="login" class="page">
+  <div class="panel">
+    <h2>Login to Continue</h2>
+    <input placeholder="Email">
+    <input type="password" placeholder="Password">
+    <button onclick="login()">Login</button>
+  </div>
+</section>
+
+<section id="checkout" class="page">
+  <div class="panel">
+    <h2>Order Summary</h2>
+    <h1 style="text-align:center;">₹<span id="final">0</span></h1>
+    <button onclick="place()">Place Order</button>
+  </div>
+</section>
+
+<script>
+let logged=false,cart=[],pending=null;
+
+function show(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+function addReq(n,p){
+  if(!logged){ pending={n,p}; show('login'); }
+  else add(n,p);
+}
+
+function add(n,p){
+  let i=cart.find(x=>x.n===n);
+  i?i.q++:cart.push({n,p,q:1});
+  render();
+}
+
+function render(){
+  let box=document.getElementById('items');
+  let t=0; box.innerHTML='';
+  cart.forEach((i,x)=>{
+    let s=i.p*i.q; t+=s;
+    box.innerHTML+=`
+      <div class="cart-item">
+        <span>${i.n}</span>
+        <span>₹${i.p}</span>
+        <span>
+          <button onclick="qty(${x},-1)">-</button>
+          ${i.q}
+          <button onclick="qty(${x},1)">+</button>
+        </span>
+        <span>₹${s}</span>
+        <button class="remove" onclick="del(${x})">X</button>
+      </div>`;
+  });
+  document.getElementById('count').innerText=cart.length;
+  document.getElementById('total').innerText=t;
+  document.getElementById('final').innerText=t;
+}
+
+function qty(i,d){ cart[i].q+=d; if(cart[i].q<=0)cart.splice(i,1); render(); }
+function del(i){ cart.splice(i,1); render(); }
+
+function login(){ logged=true; show('home'); if(pending){ add(pending.n,pending.p); pending=null; } }
+function place(){ alert("Order placed successfully 🎉"); cart=[]; render(); show('home'); }
+</script>
+
+</body>
+</html>
